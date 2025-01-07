@@ -1,13 +1,15 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { HashRouter, Route, Routes } from "react-router";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <Dashboard />;
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/*" element={<Dashboard />} />
+      </Routes>
+    </HashRouter>
+  );
 }
 
 export default App;
