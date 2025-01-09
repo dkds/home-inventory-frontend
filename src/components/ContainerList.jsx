@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { listContainers } from "../services/container.service";
-import List from "./List";
+import { listTopContainers } from "../services/container.service";
 import Header from "./Header";
+import List from "./List";
 
 export default function ContainerList() {
   const [containers, setContainers] = useState([]);
 
   useEffect(() => {
-    listContainers()
+    listTopContainers()
       .then((response) => {
         setContainers(response.data.data);
       })
