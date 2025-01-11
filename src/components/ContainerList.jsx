@@ -1,39 +1,33 @@
-import { useEffect, useState } from "react";
-import { listTopContainers } from "../services/container.service";
-import Header from "./Header";
-import List from "./List";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadContainers } from "../store/container.actions";
 import Card from "./Card";
+import Header from "./Header";
 
 export default function ContainerList() {
-  const [containers, setContainers] = useState([]);
+  const dispatch = useDispatch();
+  const containers = useSelector((state) => state.container.containers);
 
   useEffect(() => {
-    listTopContainers()
-      .then((response) => {
-        setContainers(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+    dispatch(loadContainers());
+  }, [dispatch]);
 
   return (
     <>
       <Header title="Containers" />
       <main>
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <List
-            items={containers}
-            listItem={(item) => (
-              <Card key={item.id} title={item.name}>
+          <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            {containers.map((item) => (
+              <Card key={item.id} title={item.name} className="cursor-pointer">
                 <p>
-                  Containers:
+                  Containers: {item.childContainerCount}
                   <br />
-                  Items:
+                  Items: {item.itemCount}
                 </p>
               </Card>
-            )}
-          />
+            ))}
+          </div>
         </div>
       </main>
     </>
