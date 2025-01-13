@@ -1,11 +1,11 @@
 import { HashRouter, Route, Routes } from "react-router";
-import Dashboard from "./components/Dashboard";
+import MainLayout from "./components/MainLayout";
 
 function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/*" element={<Dashboard />} />
+        <Route path="/*" element={<MainLayout />} />
       </Routes>
     </HashRouter>
   );

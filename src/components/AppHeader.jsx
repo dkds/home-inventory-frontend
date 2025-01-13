@@ -4,9 +4,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Navigate, NavLink, Route, Routes } from "react-router";
-import ContainerList from "./ContainerList";
-import ItemList from "./ItemList";
+import { NavLink } from "react-router";
 import ProfileMenu from "./ProfileMenu";
 import ProfileMenuMobile from "./ProfileMenuMobile";
 
@@ -17,7 +15,7 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Containers", href: "/containers", current: true },
+  { name: "Home", href: "/home", current: true },
   { name: "Items", href: "/items", current: false },
 ];
 const userNavigation = [
@@ -30,7 +28,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Dashboard() {
+export default function AppHeader() {
   return (
     <div className="min-h-full">
       <Disclosure as="nav" className="bg-gray-800">
@@ -113,12 +111,6 @@ export default function Dashboard() {
           <ProfileMenuMobile user={user} userNavigation={userNavigation} />
         </DisclosurePanel>
       </Disclosure>
-
-      <Routes>
-        <Route index element={<Navigate to="/containers" />} />
-        <Route path="containers" element={<ContainerList />} />
-        <Route path="items" element={<ItemList />} />
-      </Routes>
     </div>
   );
 }

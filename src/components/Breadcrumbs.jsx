@@ -1,24 +1,25 @@
-/* eslint-disable react/prop-types */
+import { ChevronRightIcon, HomeIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   loadContainerParentList,
   setSelectedContainer,
 } from "../store/container.actions";
-import { useSelector } from "react-redux";
-import { HomeIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 
-export default function Breadcrumbs({ containerId }) {
+export default function Breadcrumbs() {
   const dispatch = useDispatch();
   const parentContainers = useSelector(
     (state) => state.container.parentContainers
   );
+  const selectedContainer = useSelector(
+    (state) => state.container.selectedContainer
+  );
 
   useEffect(() => {
-    if (containerId) {
-      dispatch(loadContainerParentList(containerId));
+    if (selectedContainer) {
+      dispatch(loadContainerParentList(selectedContainer));
     }
-  }, [containerId, dispatch]);
+  }, [selectedContainer, dispatch]);
 
   function handleItemClick(index, containerId) {
     if (index !== parentContainers.length) {
@@ -39,10 +40,10 @@ export default function Breadcrumbs({ containerId }) {
 
   return (
     <nav
-      className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
+      className="mx-auto max-w-7xl flex px-5 py-1 text-gray-700 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 shadow "
       aria-label="Breadcrumb"
     >
-      <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+      <ol className="inline-flex items-center space-x-1 py-3 overflow-x-scroll">
         <li
           className="inline-flex items-center"
           onClick={() => handleItemClick(0, null)}
