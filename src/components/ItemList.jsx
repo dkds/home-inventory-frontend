@@ -29,15 +29,9 @@ export default function ItemList() {
               className="cursor-pointer"
               image="https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ"
               onClick={() => handleCardClick(item.id)}
-            >
-              <p>
-                Containers: {item.childContainerCount}
-                <br />
-                Items: {item.itemCount}
-              </p>
-            </Card>
+            />
           ))}
-          {!items.length && <p>No items found</p> }
+          {!items.length && <p>No items found</p>}
         </div>
       </div>
     </>
