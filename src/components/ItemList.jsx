@@ -25,11 +25,12 @@ export default function ItemList() {
           {items.map((item) => (
             <Card
               key={item.id}
-              title={item.name}
               className="cursor-pointer"
               image="https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ"
               onClick={() => handleCardClick(item.id)}
-            />
+            >
+              <p>{item.name}</p>
+            </Card>
           ))}
           {!items.length && <p>No items found</p>}
         </div>
