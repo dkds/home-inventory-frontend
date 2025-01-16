@@ -12,7 +12,7 @@ export default function Card({
     <div className={classes} onClick={onClick}>
       {image && <img className="rounded-t-lg pb-1" src={image} alt="" />}
       {title && (
-        <h5 className="mb-2 px-4 pt-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="px-4 pt-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}
         </h5>
       )}
