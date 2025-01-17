@@ -5,8 +5,8 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router";
-import ProfileMenu from "./ProfileMenu";
-import ProfileMenuMobile from "./ProfileMenuMobile";
+import ProfileMenu from "@components/ProfileMenu";
+import ProfileMenuMobile from "@components/ProfileMenuMobile";
 
 const user = {
   name: "Tom Cook",

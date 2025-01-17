@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   loadContainers,
   setSelectedContainer,
-} from "../store/container.actions";
-import Card from "./Card";
+} from "@/store/container.actions";
+import Card from "@components/Card";
 
 export default function ContainerList() {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ export default function ContainerList() {
               </p>
             </Card>
           ))}
-          {!containers.length && <p>No containers found</p> }
+          {!containers.length && <p>No containers found</p>}
         </div>
       </div>
     </>

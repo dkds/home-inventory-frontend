@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   loadContainers,
   setSelectedContainer,
-} from "../store/container.actions";
-import Card from "./Card";
+} from "@/store/container.actions";
+import Card from "@components/Card";
 
 export default function ItemList() {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
-import Breadcrumbs from "./Breadcrumbs";
-import ContainerList from "./ContainerList";
-import Heading from "./Heading";
-import ItemList from "./ItemList";
+import Breadcrumbs from "@components/Breadcrumbs";
+import ContainerList from "@components/ContainerList";
+import Heading from "@components/Heading";
+import ItemList from "@components/ItemList";
 
 export default function Home() {
   return (

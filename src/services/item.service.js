@@ -1,4 +1,4 @@
-import { apiClient } from "./axios.service";
+import { apiClient } from "@/services/axios.service";
 
 export const listItems = () => {
   return apiClient.get("/items");

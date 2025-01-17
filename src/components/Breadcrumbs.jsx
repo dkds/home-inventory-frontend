@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   loadContainerParentList,
   setSelectedContainer,
-} from "../store/container.actions";
+} from "@/store/container.actions";
 
 export default function Breadcrumbs() {
   const dispatch = useDispatch();

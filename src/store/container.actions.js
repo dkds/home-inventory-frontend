@@ -4,8 +4,8 @@ import {
   getContainerInfo,
   listByContainer,
   listTopContainers,
-} from "../services/container.service";
-import { containerActions } from "./container.slice";
+} from "@/services/container.service";
+import { containerActions } from "@/store/container.slice";
 
 export const setSelectedContainer = (containerId) => {
   return async (dispatch) => {
