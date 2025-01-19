@@ -1,16 +1,20 @@
 import Card from "@components/Card";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 
 describe("Card", () => {
-  test("renders heading", async () => {
-    render(<Card />);
-    expect(screen.getByRole("heading", { name: "Users" })).toBeInTheDocument();
+  test("renders title if title is provided", async () => {
+    const testTitle = "Test title";
+    const { container } = render(<Card title={testTitle} />);
+    const titleElements = container.getElementsByClassName("card__title");
+    expect(titleElements.length > 0).toBeTruthy();
+    const titleElement = titleElements[0];
+    expect(titleElement).toBeVisible();
+    expect(titleElement).toHaveTextContent(testTitle);
   });
-
-  test("renders a list of users", async () => {
-    render(<Card />);
-    const users = await screen.findAllByRole("listitem");
-    expect(users).toHaveLength(2);
+  test("doesn't render title if title is NOT provided", async () => {
+    const { container } = render(<Card />);
+    const titleElements = container.getElementsByClassName("card__title");
+    expect(titleElements.length === 0).toBeTruthy();
   });
 });
