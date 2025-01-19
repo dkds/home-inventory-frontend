@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "tailwindcss";
 import path from "path";
+import tailwindcss from "tailwindcss";
+import { defineConfig } from "vite";
+import viteTsconfigPaths from "vite-tsconfig-paths";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), viteTsconfigPaths()],
   css: {
     postcss: {
       plugins: [tailwindcss()],
@@ -15,7 +16,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      '@components': path.resolve(__dirname, './src/components'),
+      "@components": path.resolve(__dirname, "./src/components"),
     },
   },
   test: {

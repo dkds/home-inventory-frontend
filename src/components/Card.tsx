@@ -1,4 +1,12 @@
-/* eslint-disable react/prop-types */
+interface CardProps {
+  title: string;
+  children: React.ReactNode;
+  actions: React.ReactNode;
+  image: string;
+  className: string;
+  onClick: React.ComponentProps<"div">["onClick"];
+}
+
 export default function Card({
   title,
   children,
@@ -6,7 +14,7 @@ export default function Card({
   image,
   className,
   onClick,
-}) {
+}: CardProps) {
   const classes = `max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ${className}`;
   return (
     <div className={classes} onClick={onClick}>
