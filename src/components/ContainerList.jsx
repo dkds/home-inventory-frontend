@@ -4,7 +4,7 @@ import {
   loadContainers,
   setSelectedContainer,
 } from "@/store/container.actions";
-import Card from "@components/Card";
+import { Card } from "@components/card";
 
 export default function ContainerList() {
   const dispatch = useDispatch();
@@ -25,15 +25,17 @@ export default function ContainerList() {
           {containers.map((container) => (
             <Card
               key={container.id}
-              title={container.name}
               className="cursor-pointer"
               onClick={() => handleCardClick(container.id)}
             >
-              <p>
-                Containers: {container.childContainerCount}
-                <br />
-                Items: {container.itemCount}
-              </p>
+              <Card.Title>{container.name}</Card.Title>
+              <Card.Content>
+                <p>
+                  Containers: {container.childContainerCount}
+                  <br />
+                  Items: {container.itemCount}
+                </p>
+              </Card.Content>
             </Card>
           ))}
           {!containers.length && <p>No containers found</p>}

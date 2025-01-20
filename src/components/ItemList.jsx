@@ -4,7 +4,7 @@ import {
   loadContainers,
   setSelectedContainer,
 } from "@/store/container.actions";
-import Card from "@components/Card";
+import { Card } from "@components/card";
 
 export default function ItemList() {
   const dispatch = useDispatch();
@@ -29,7 +29,9 @@ export default function ItemList() {
               image="https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ"
               onClick={() => handleCardClick(item.id)}
             >
-              <p>{item.name}</p>
+              <Card.Content>
+                <p>{item.name}</p>
+              </Card.Content>
             </Card>
           ))}
           {!items.length && <p>No items found</p>}
