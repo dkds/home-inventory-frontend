@@ -2,12 +2,12 @@ import CardContent, { CardContentProps } from "./CardContent";
 import CardTitle, { CardTitleProps } from "./CardTitle";
 
 interface CardProps {
-  title: string;
-  children: React.ReactNode;
-  actions: React.ReactNode;
-  image: string;
-  className: string;
-  onClick: React.ComponentProps<"div">["onClick"];
+  title?: string;
+  children?: React.ReactNode;
+  actions?: React.ReactNode;
+  image?: string;
+  className?: string;
+  onClick?: React.ComponentProps<"div">["onClick"];
 }
 
 const Card: React.FC<CardProps> & { Title: React.FC<CardTitleProps> } & {
