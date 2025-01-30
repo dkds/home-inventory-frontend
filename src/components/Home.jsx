@@ -4,19 +4,25 @@ import Breadcrumbs from "@components/Breadcrumbs";
 import ContainerList from "@components/ContainerList";
 import Heading from "@components/Heading";
 import ItemList from "@components/ItemList";
-import { PlusIcon } from "@heroicons/react/16/solid";
+import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
 import { useRef } from "react";
 
+const DIALOG_TITLE_NEW_CONTAINER = "Add new container";
+
 export default function Home() {
-  const dialog = useRef();
+  const containerEntryDialog = useRef();
+  const [containerEntryTitle, setContainerEntryTitle] = useState(
+    DIALOG_TITLE_NEW_CONTAINER
+  );
   const handleAddContainerClick = () => {
-    console.log("test");
-    dialog.current.open();
+    setContainerEntryTitle(DIALOG_TITLE_NEW_CONTAINER);
+    containerEntryDialog.current.open();
   };
 
   return (
     <>
-      <ContainerEntry ref={dialog} title="Test Heading" />
+      <ContainerEntry ref={containerEntryDialog} title={containerEntryTitle} />
       <Breadcrumbs />
       <main>
         <Heading title="Containers">
@@ -26,7 +32,11 @@ export default function Home() {
         </Heading>
         <ContainerList />
 
-        <Heading title="Items" />
+        <Heading title="Items">
+          <Button icon={PlusIcon}>Add new item</Button>
+          <Button icon={PencilIcon}>Edit</Button>
+          <Button icon={TrashIcon}>Delete</Button>
+        </Heading>
         <ItemList />
       </main>
     </>
