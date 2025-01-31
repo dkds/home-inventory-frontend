@@ -1,12 +1,14 @@
 import { useForm } from "@tanstack/react-form";
 import { RefObject } from "react";
-import { Dialog } from "./dialog";
+import { Dialog } from "@/components/dialog";
 
 interface ContainerEntryProps {
   ref: RefObject<any>;
   title?: string;
   children?: React.ReactNode;
-  actions?: React.ReactNode;
+  parentContainer: string;
+  containerName: string;
+  onContainerNameChange?: (containerName: string) => void
   className?: string;
   open?: () => void;
   close?: () => void;

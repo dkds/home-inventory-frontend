@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router";
-import AppHeader from "@components/AppHeader";
-import Home from "@components/Home";
-import ItemList from "@components/ItemList";
+import AppHeader from "@/components/AppHeader";
+import Home from "@/components/Home";
+import ItemList from "@/components/ItemList";
 
 export default function MainLayout() {
   return (

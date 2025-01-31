@@ -1,9 +1,9 @@
 import { Button } from "@/components/button";
 import ContainerEntry from "@/components/ContainerEntry";
-import Breadcrumbs from "@components/Breadcrumbs";
-import ContainerList from "@components/ContainerList";
-import Heading from "@components/Heading";
-import ItemList from "@components/ItemList";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import ContainerList from "@/components/ContainerList";
+import Heading from "@/components/Heading";
+import ItemList from "@/components/ItemList";
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { useRef } from "react";

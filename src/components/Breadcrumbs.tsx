@@ -1,10 +1,15 @@
-import { ChevronRightIcon, HomeIcon } from "@heroicons/react/16/solid";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   loadContainerParentList,
   setSelectedContainer,
 } from "@/store/container.actions";
+import { ChevronRightIcon, HomeIcon } from "@heroicons/react/16/solid";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+interface ParentContainer {
+  id: string;
+  name: string;
+}
 
 export default function Breadcrumbs() {
   const dispatch = useDispatch();

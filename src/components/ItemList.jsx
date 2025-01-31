@@ -4,7 +4,7 @@ import {
   loadContainers,
   setSelectedContainer,
 } from "@/store/container.actions";
-import { Card } from "@components/card";
+import { Card } from "@/components/card";
 
 export default function ItemList() {
   const dispatch = useDispatch();
