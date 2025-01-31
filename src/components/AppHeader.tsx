@@ -7,24 +7,25 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router";
 import ProfileMenu from "@/components/ProfileMenu";
 import ProfileMenuMobile from "@/components/ProfileMenuMobile";
+import { NavigationItem, User, UserNavigationItem } from "@/types";
 
-const user = {
+const user: User = {
   name: "Tom Cook",
   email: "tom@example.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
-const navigation = [
+const navigation: NavigationItem[] = [
   { name: "Home", href: "/home", current: true },
   { name: "Items", href: "/items", current: false },
 ];
-const userNavigation = [
+const userNavigation: UserNavigationItem[] = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
   { name: "Sign out", href: "#" },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -95,7 +96,7 @@ export default function AppHeader() {
                 as={NavLink}
                 to={item.href}
                 aria-current={item.current ? "page" : undefined}
-                className={({ isActive }) =>
+                className={({ isActive }: { isActive: boolean }) =>
                   classNames(
                     isActive
                       ? "bg-gray-900 text-white"

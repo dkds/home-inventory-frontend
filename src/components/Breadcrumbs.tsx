@@ -1,38 +1,34 @@
+import { RootState } from "@/store";
 import {
-  loadContainerParentList,
-  setSelectedContainer,
+  loadContainerParentListAction,
+  setSelectedContainerAction
 } from "@/store/container.actions";
 import { ChevronRightIcon, HomeIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-interface ParentContainer {
-  id: string;
-  name: string;
-}
-
 export default function Breadcrumbs() {
   const dispatch = useDispatch();
   const parentContainers = useSelector(
-    (state) => state.container.parentContainers
+    (state: RootState) => state.container.parentContainers
   );
-  const selectedContainer = useSelector(
-    (state) => state.container.selectedContainer
+  const selectedContainerId = useSelector(
+    (state: RootState) => state.container.selectedContainerId
   );
 
   useEffect(() => {
-    if (selectedContainer) {
-      dispatch(loadContainerParentList(selectedContainer));
+    if (selectedContainerId) {
+      dispatch(loadContainerParentListAction(selectedContainerId));
     }
-  }, [selectedContainer, dispatch]);
+  }, [selectedContainerId, dispatch]);
 
-  function handleItemClick(index, containerId) {
+  function handleItemClick(index: number, containerId: number | null) {
     if (index !== parentContainers.length) {
-      dispatch(setSelectedContainer(containerId));
+      dispatch(setSelectedContainerAction(containerId));
     }
   }
 
-  function getItemClasses(index) {
+  function getItemClasses(index: number) {
     let classes = "ms-1 text-sm font-medium";
     if (index !== parentContainers.length) {
       classes +=

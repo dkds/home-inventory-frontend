@@ -2,14 +2,15 @@ import { XMarkIcon } from "@heroicons/react/16/solid";
 import { RefObject, useImperativeHandle, useRef } from "react";
 import { createPortal } from "react-dom";
 
-interface DialogProps {
-  ref: RefObject<{}>;
+export interface DialogProps {
+  ref: RefObject<{
+    open?: () => void;
+    close?: () => void;
+  }>;
   title?: string;
   children?: React.ReactNode;
   actions?: React.ReactNode;
   className?: string;
-  open?: () => void;
-  close?: () => void;
 }
 
 const Dialog: React.FC<DialogProps> = ({

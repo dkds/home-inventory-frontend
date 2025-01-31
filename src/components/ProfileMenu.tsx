@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
+import { User, UserNavigationItem } from "@/types";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
-export default function ProfileMenu({ user, userNavigation }) {
+export default function ProfileMenu({
+  user,
+  userNavigation,
+}: {
+  user: User;
+  userNavigation: UserNavigationItem[];
+}) {
   return (
     <Menu as="div" className="relative ml-3">
       <div>

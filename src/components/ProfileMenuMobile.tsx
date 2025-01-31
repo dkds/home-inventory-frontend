@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
+import { User, UserNavigationItem } from "@/types";
 import { DisclosureButton } from "@headlessui/react";
 
-export default function ProfileMenuMobile({ user, userNavigation }) {
+export default function ProfileMenuMobile({
+  user,
+  userNavigation,
+}: {
+  user: User;
+  userNavigation: UserNavigationItem[];
+}) {
   return (
     <div className="border-t border-gray-700 pb-3 pt-4">
       <div className="flex items-center px-5">

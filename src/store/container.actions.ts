@@ -5,22 +5,49 @@ import {
   listTopContainers,
 } from "@/services/container.service";
 import { containerActions } from "@/store/container.slice";
-import pLimit from "p-limit";
-import { AppDispatch } from "@/store";
 import { Container } from "@/types";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import pLimit from "p-limit";
 
-export const setSelectedContainer = (containerId: Number | null) => {
-  return async (dispatch: AppDispatch) => {
-    dispatch(loadContainers(containerId));
-    dispatch(containerActions.setSelectedContainer(containerId));
-    if (containerId === null) {
-      dispatch(containerActions.setParentContainers([]));
-    }
+export const SET_SELECTED_CONTAINER = "containers/setSelectedContainer";
+export const LOAD_CONTAINERS = "containers/loadContainers";
+export const LOAD_CONTAINER_PARENT_LIST = "containers/loadContainerParentList";
+
+export const setSelectedContainerAction = (containerId: Number | null) => {
+  return {
+    type: SET_SELECTED_CONTAINER,
+    payload: containerId,
   };
 };
 
-export const loadContainers = (containerId: Number | null) => {
-  return async (dispatch: AppDispatch) => {
+export const loadContainersAction = (containerId: Number | null) => {
+  return {
+    type: LOAD_CONTAINERS,
+    payload: containerId,
+  };
+};
+
+export const loadContainerParentListAction = (containerId: Number | null) => {
+  return {
+    type: LOAD_CONTAINER_PARENT_LIST,
+    payload: containerId,
+  };
+};
+
+export const setSelectedContainer = createAsyncThunk(
+  SET_SELECTED_CONTAINER,
+  (containerId: Number | null, thunkAPI) => {
+    thunkAPI.dispatch(loadContainers(containerId));
+    if (containerId === null) {
+      thunkAPI.dispatch(containerActions.setParentContainers([]));
+    }
+    return containerId;
+  }
+);
+
+export const loadContainers = createAsyncThunk(
+  LOAD_CONTAINERS,
+  async (containerId: Number | null, thunkAPI) => {
     const limit = pLimit(3);
     try {
       let response;
@@ -36,37 +63,35 @@ export const loadContainers = (containerId: Number | null) => {
             return {
               ...container,
               ...containerInfoResponse.data.data,
-            };
+            } as Container;
           })
       );
-      const containers = await Promise.all(containersPromises);
-      dispatch(containerActions.setContainers(containers));
+      return Promise.all(containersPromises);
     } catch (error) {
-      console.log(error);
+      return thunkAPI.rejectWithValue(error);
     }
-  };
-};
-
-export const loadContainerParentList = (containerId: Number | null) => {
-  function getParentContainer(
-    container: Container,
-    containerList: Container[]
-  ) {
-    if (container.parentContainer) {
-      containerList.push(container.parentContainer);
-      return getParentContainer(container.parentContainer, containerList);
-    }
-    return containerList;
   }
-  return async (dispatch: AppDispatch) => {
+);
+
+function getParentContainer(container: Container, containerList: Container[]) {
+  if (container.parentContainer) {
+    containerList.push(container.parentContainer);
+    return getParentContainer(container.parentContainer, containerList);
+  }
+  return containerList;
+}
+
+export const loadContainerParentList = createAsyncThunk(
+  LOAD_CONTAINER_PARENT_LIST,
+  async (containerId: Number | null, thunkAPI) => {
     try {
       const response = await getContainer(containerId);
       const container = response.data.data;
       const containerList = getParentContainer(container, [container]);
       containerList.reverse();
-      dispatch(containerActions.setParentContainers(containerList));
+      return containerList;
     } catch (error) {
-      console.log(error);
+      return thunkAPI.rejectWithValue(error);
     }
-  };
-};
+  }
+);
