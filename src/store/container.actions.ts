@@ -10,34 +10,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import pLimit from "p-limit";
 
 export const SET_SELECTED_CONTAINER = "containers/setSelectedContainer";
-export const LOAD_CONTAINERS = "containers/loadContainers";
+export const LOAD_CONTAINER_LIST = "containers/loadContainerList";
 export const LOAD_CONTAINER_PARENT_LIST = "containers/loadContainerParentList";
-
-export const setSelectedContainerAction = (containerId: Number | null) => {
-  return {
-    type: SET_SELECTED_CONTAINER,
-    payload: containerId,
-  };
-};
-
-export const loadContainersAction = (containerId: Number | null) => {
-  return {
-    type: LOAD_CONTAINERS,
-    payload: containerId,
-  };
-};
-
-export const loadContainerParentListAction = (containerId: Number | null) => {
-  return {
-    type: LOAD_CONTAINER_PARENT_LIST,
-    payload: containerId,
-  };
-};
 
 export const setSelectedContainer = createAsyncThunk(
   SET_SELECTED_CONTAINER,
-  (containerId: Number | null, thunkAPI) => {
-    thunkAPI.dispatch(loadContainers(containerId));
+  (containerId: number | null, thunkAPI) => {
+    thunkAPI.dispatch(loadContainerList(containerId));
     if (containerId === null) {
       thunkAPI.dispatch(containerActions.setParentContainers([]));
     }
@@ -45,9 +24,9 @@ export const setSelectedContainer = createAsyncThunk(
   }
 );
 
-export const loadContainers = createAsyncThunk(
-  LOAD_CONTAINERS,
-  async (containerId: Number | null, thunkAPI) => {
+export const loadContainerList = createAsyncThunk(
+  LOAD_CONTAINER_LIST,
+  async (containerId: number | null, thunkAPI) => {
     const limit = pLimit(3);
     try {
       let response;

@@ -1,24 +1,24 @@
 import { Card } from "@/components/card";
-import { RootState } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import {
-  loadContainersAction,
-  setSelectedContainerAction
+  loadContainerList,
+  setSelectedContainer
 } from "@/store/container.actions";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function ContainerList() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const containers = useSelector(
     (state: RootState) => state.container.containerList
   );
 
   useEffect(() => {
-    dispatch(loadContainersAction(null));
+    dispatch(loadContainerList(null));
   }, [dispatch]);
 
   function handleCardClick(containerId: number) {
-    dispatch(setSelectedContainerAction(containerId));
+    dispatch(setSelectedContainer(containerId));
   }
 
   return (

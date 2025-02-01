@@ -1,16 +1,16 @@
-import { RootState } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import {
-  loadContainerParentListAction,
-  setSelectedContainerAction
+  loadContainerParentList,
+  setSelectedContainer
 } from "@/store/container.actions";
 import { ChevronRightIcon, HomeIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Breadcrumbs() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const parentContainers = useSelector(
-    (state: RootState) => state.container.parentContainers
+    (state: RootState) => state.container.parentContainerList
   );
   const selectedContainerId = useSelector(
     (state: RootState) => state.container.selectedContainerId
@@ -18,13 +18,13 @@ export default function Breadcrumbs() {
 
   useEffect(() => {
     if (selectedContainerId) {
-      dispatch(loadContainerParentListAction(selectedContainerId));
+      dispatch(loadContainerParentList(selectedContainerId));
     }
   }, [selectedContainerId, dispatch]);
 
   function handleItemClick(index: number, containerId: number | null) {
     if (index !== parentContainers.length) {
-      dispatch(setSelectedContainerAction(containerId));
+      dispatch(setSelectedContainer(containerId));
     }
   }
 
